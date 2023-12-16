@@ -3,7 +3,7 @@ import ytdl from "ytdl-core"
 import yts from "yt-search"
 import {
     generateWAMessageFromContent
-} from "@whiskeysockets/baileys"
+} from "@adiwajshing/baileys"
 
 let limit = 100
 let handler = async (m, {
@@ -16,7 +16,7 @@ let handler = async (m, {
     if (!text) throw `Use example *${usedPrefix + command}* DONT GO BABY DONT GO...`
     const combinedRegex = /^(play|song)$/i;
     const isMP3 = combinedRegex.test(command);
-    m.react('🎶')
+    m.react('📩')
     try {
         let vid = await searchAndFilterVideos(text)
         if (!vid) throw "Video Not Found, Try Another Title"
@@ -28,19 +28,16 @@ let handler = async (m, {
             ago,
             url
         } = vid
-        let dla = "💝𝘘𝘜𝘌𝘌𝘕-𝘈𝘓𝘌𝘟𝘈-MD Downloading audio please wait"
-        let dls = "💝𝘘𝘜𝘌𝘌𝘕-𝘈𝘓𝘌𝘟𝘈-MD Downloading audio succes"
+        let dla = "💝QUEEN-ALEXA-MD Downloading audio please wait"
+        let dls = "💝 QUEEN-ALEXA-MD Downloading audio succes"
 
-        let captvid = `_*🎧𝘘𝘜𝘌𝘌𝘕-𝘈𝘓𝘌𝘟𝘈_MD-YOUTUBE-DOWNLOAD🎧*_
-
-        
-_*💝DOWNLOADING : ${title ? title : 'not know TITLE'}*_
-
-_*💝DURATION : ${timestamp ? timestamp : 'not know'}*_
-
-_*💝UPLOAD ON : ${ago ? ago : 'not know'}*_
-
-_*💝CONNECT URL : ${url}*_`
+        let captvid = `*➿ *YOUTUBE-DL ➿*
+*⏰Title:* ${title ? title : 'not know'}
+*⌛Duration:* ${timestamp ? timestamp : 'not know'}
+*👀Views:* ${formatNumber(views) ? formatNumber(views) : 'not know'}
+*📅Upload:* ${ago ? ago : 'not know'}
+*🔗Link:* ${url}
+*📤 ඔබගේ ගීතය ලබාදෙමින් පවතී....*`
         let ytthumb = await (await conn.getFile(thumbnail)).data
         let msg = await generateWAMessageFromContent(m.chat, {
             extendedTextMessage: {
@@ -53,15 +50,15 @@ _*💝CONNECT URL : ${url}*_`
                         containsAutoReply: true,
                         mediaType: 1,
                         mediaUrl: url,
-                        renderLargerThumbnail: false,
-                        showAdAttribution: false,
-                        sourceId: "queen alexa md",
+                        renderLargerThumbnail: true,
+                        showAdAttribution: true,
+                        sourceId: "lua ser ofc",
                         sourceType: "PDF",
                         previewType: "PDF",
                         sourceUrl: url,
                         thumbnail: ytthumb,
                         thumbnailUrl: thumbnail,
-                        title: "💝QUEEN-ALEXA-MD💝 "
+                        title: "*💝QUEEN-ALEXA💝 *"
                     }
                 }
             }
@@ -72,7 +69,7 @@ _*💝CONNECT URL : ${url}*_`
 
         if (isMP3) {
             let Ytdl = await ytmp3(url)
-            let dls = "💝Play audio succes"
+            let dls = "Play audio succes"
             let ytthumb = await (await conn.getFile(Ytdl.meta.image)).data
             let doc = {
                 audio: Ytdl.buffer,
@@ -80,8 +77,8 @@ _*💝CONNECT URL : ${url}*_`
                 fileName: Ytdl.meta.title,
                 contextInfo: {
                     externalAdReply: {
-                        showAdAttribution: false,
-                        mediaType: 1,
+                        showAdAttribution: true,
+                        mediaType: 2,
                         mediaUrl: url,
                         title: Ytdl.meta.title,
                         body: dls,
@@ -135,11 +132,13 @@ _*💝CONNECT URL : ${url}*_`
         await m.reply(eror)
     }
 }
-handler.help = ['play']
-handler.tags = ['dl']
-handler.command = ['play', 'song']
+handler.help = ['play'].map((v) => v + ' <query>');
+handler.tags = ['dl'];
+handler.command = /^play$/i;
 
-export default handler
+handler.exp = 0;
+
+export default handler;
 
 function formatNumber(num) {
     const suffixes = ['', 'k', 'M', 'B', 'T'];
@@ -291,4 +290,5 @@ async function ytmp4(query, quality = 134) {
     } catch (error) {
         throw error
     }
-            }
+}
+
