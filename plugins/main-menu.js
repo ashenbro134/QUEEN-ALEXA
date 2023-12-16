@@ -5,39 +5,36 @@ import fetch from 'node-fetch'
 import { xpRange } from '../lib/levelling.js'
 //import { plugins } from '../lib/plugins.js'
 let tags = {
-  'main': '𝗕𝗢𝗧 𝗗𝗘𝗔𝗧𝗜𝗟𝗦',
-  'game': '𝗚𝗔𝗠𝗘 𝗠𝗘𝗡𝗨 ',
+  'main': '👸 *BOT-DETAILS* 👸',
+  'game': '🎮 *GAMES-MENU* 🎮 ',
   'sticker': '🪀 *STICKER-MENU* 🪀',
-  'img': '🏷️ *IMAGE-MENU* 🏷️',
   'maker': '🛠️ *MAKER-MENU* 🛠️',
-  'prem': '🤴 *PREMIUM-MENU* 🤴',
   'group': '⚡ *GROUP-MENU* ⚡',
   'nable': '🍭 *EN/DISABLE OPCIONES* 🍭', 
   'dl': '📩 *DOWNLOAD-MENU* 📩',
   'tools': '🍃 *TOOLS-MENU* 🍃',
-  'fun': '🌀 *FUN-MENU* 🌀',
+  'cmd': '🧬 *DATABASE-MENU* 🧬',
   'owner': '👤 *OWNER-MENU* 👤', 
-  'ALEXA': '*💝ALEXA OWN MENU💝*',
-
 }
 const defaultMenu = {
   before: `
-
- 👋 𝙃𝙄 : *%name*
+∇————————————————————————⊶  
+      𝘼𝙇𝙀𝙓𝘼 𝙒𝘼 𝘽𝙊𝙏 𝘽𝙔 𝘼𝙎𝙃𝙀𝙉
+∇————————————————————————⊶
+ 👋 *HI* : *%name*
 *THE BEST WHATSAPP BOT....*
 ╭——————————————————————————————⊶
 ╏ 🎀 *Level*     : *%level* 
 ╏ 🔱 *Users*     : *%totalreg*
 ╏ ⏳ *Run Time* : *%muptime*
-╏ 💝 *Bot Name* : *𝙌𝙐𝙀𝙀𝙉-𝘼𝙇𝙀𝙓𝘼*
-╏ 💝 *Creator*    : *𝘼𝙎𝙃𝙀𝙉*
-╏ ⚡ *Nice To Meet You* *%name* 
-╏
+╏ 💝 *Bot Name* : *QUEEN-ALEXQ*
+╏ 💝 *Creator*    : *Ashen Induwara*
+╏ ⚡ *Nice To Meet You* *%name* ➿
 ╰——————————————————————————————⊶
 ┏━━❬ Qᴜᴇᴇɴ-ᴀʟᴇxᴀ-ᴄᴏᴍᴍᴀɴᴅ-ʟɪꜱᴛ ❭━━┓⦁
 `.trimStart(),
   header: '╭━━━━✘ %category ✘━━✣',
-  body: '╏╏ 💝 *%cmd*',
+  body: '╏╏ 🔖 *%cmd*',
   footer: '╰━━━━━━━━━━━━━━──⊷\n',
   after: `
 `,
@@ -103,7 +100,7 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
     let header = conn.menu.header || defaultMenu.header
     let body = conn.menu.body || defaultMenu.body
     let footer = conn.menu.footer || defaultMenu.footer
-    let after = conn.menu.after || (conn.user.jid == conn.user.jid ? '' :'*The Queen-Alexa* https://wa.me/${conn.user.jid.split`@`[0]}`) + defaultMenu.after
+    let after = conn.menu.after || (conn.user.jid == conn.user.jid ? '' :'*The Queen-Sakura* https://wa.me/${conn.user.jid.split`@`[0]}`) + defaultMenu.after
     let _text = [
       before,
       ...Object.keys(tags).map(tag => {
@@ -139,7 +136,7 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
     }
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
     
-    let pp = './src/Alexa_menu.jpg'
+    let pp = './src/sakura_menu.jpg'
      
     conn.sendFile(m.chat, pp, 'menu.jpg', text.trim(), m, null, rpl)
     /*conn.sendButton(m.chat, text.trim(), '▢ DyLux  ┃ ᴮᴼᵀ\n▢ Sígueme en Instagram\nhttps://www.instagram.com/fg98_ff', pp, [
@@ -148,7 +145,7 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
       ['⌬ Grupos', `${_p}gpdylux`]
     ],m, rpl)*/
   
-    m.react('🔠') 
+    m.react('💝') 
     
   } catch (e) {
     conn.reply(m.chat, '❎  Sorry, the menu has an error', m)
@@ -157,7 +154,7 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
 }
 handler.help = ['allmenu']
 handler.tags = ['main']
-handler.command = ['menu', 'allcmd', 'alllist'] 
+handler.command = ['allmenu', 'fullcmd', 'alllist'] 
 handler.register = false
 
 handler.exp = 3
